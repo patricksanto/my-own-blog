@@ -2,8 +2,7 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_article, only: %i[show edit update destroy]
   def index
-
-    @articles = user_signed_in? ? Article.all : Article.published
+    @articles = user_signed_in? ? Article.sorted : Article.published.sorted
   end
 
   def show
