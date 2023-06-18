@@ -1,0 +1,9 @@
+<h1>My new blog</h1>
+<h2>New in Tech</h2>
+
+<% @articles.each do |article| %>
+  <div>
+    <h3><%= link_to article.title, article %></h3>
+    <p><%= article.body %></p>
+  </div>
+<% end %>
