@@ -16,6 +16,12 @@
       <% end %>
   </div>
 
+  <div>
+    <%= f.label :published_at %>
+    <%= f.datetime_select :published_at, include_blank: true %>
+  </div>
+
+
     <%= f.submit %>
 
 <% end %>
