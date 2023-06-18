@@ -2,12 +2,11 @@ class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
   before_action :set_article, only: %i[show edit update destroy]
   def index
-    @articles = Article.all
+
+    @articles = user_signed_in? ? Article.all : Article.published
   end
 
   def show
-  rescue ActiveRecord::RecordNotFound
-    redirect_to root_path
   end
 
   def new
@@ -43,10 +42,14 @@ class ArticlesController < ApplicationController
   private
 
   def set_article
-    @article = Article.find_by(params[:id])
+    if user_signed_in?
+      @article = Article.find(params[:id])
+    else
+      @article = Article.find(params[:id])
+    end
   end
 
   def article_params
-    params.require(:article).permit(:title, :body)
+    params.require(:article).permit(:title, :body, :published_at)
   end
 end

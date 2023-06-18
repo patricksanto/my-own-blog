@@ -4,8 +4,14 @@
 <h2>New in Tech</h2>
 
 <% @articles.each do |article| %>
-  <div>
+  <div class="px-4 py-2 my-2 border border-slate-500 rounded-xl">
     <h3><%= link_to article.title, article %></h3>
     <p><%= article.body %></p>
+
+    <% if article.draft? %>
+      <p class="text-red-500">this is a draft</p>
+    <% elsif article.scheduled? %>
+      <p class="text-red-500">this article gonna be available in <%= article.published_at %></p>
+    <% end %>
   </div>
 <% end %>
