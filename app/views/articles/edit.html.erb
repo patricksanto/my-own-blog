@@ -4,3 +4,4 @@
 
 </br>
 <%= link_to "undone", article_path(@article) %>
+<%= button_to "Delete Article", @article, method: :delete, data: {turbo_confirm: "Are you sure you want this Artcile deleted?"} %>
